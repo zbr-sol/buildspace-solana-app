@@ -6,8 +6,19 @@ import './App.css';
 const TWITTER_HANDLE = 'zbr_sol';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
+const TEST_GIFS = [
+  'https://media.giphy.com/media/3o7TKpKJHK0teBsdEI/giphy.gif',
+  'https://media.giphy.com/media/nQdIeEMDNtASk/giphy.gif',
+  'https://media.giphy.com/media/QrQJeDeOZJLtm/giphy.gif',
+  'https://media.giphy.com/media/qAB5xbv44cCAg/giphy.gif',
+  'https://media.giphy.com/media/NMRWHDgSRS8es/giphy.gif',
+  'https://media.giphy.com/media/jP6d3UZh8GNRm/giphy.gif'
+];
+
 const App = () => {
   const [walletAddress, setWalletAddress] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+  const [gifList, setGifList] = useState([]);
   /*
    * This function holds the logic for deciding if a Phantom Wallet is
    * connected or not
@@ -49,6 +60,21 @@ const App = () => {
     }
   };
 
+  const onInputChange = (event) => {
+    const { value } = event.target;
+    setInputValue(value);
+  };
+
+  const sendGif = async () => {
+    if (inputValue.length > 0) {
+      console.log('Gif link:', inputValue);
+      setGifList([...gifList, inputValue]);
+      setInputValue('');
+    } else {
+      console.log('Empty input. Try again.');
+    }
+  };
+
   const renderNotConnectedContainer = () => (
     <button
       className="cta-button connect-wallet-button"
@@ -56,6 +82,33 @@ const App = () => {
     >
       Connect to Wallet
     </button>
+  );
+
+  const renderConnectedContainer = () => (
+    <div className="connected-container">
+      {/* Go ahead and add this input and button to start */}
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          sendGif();
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Enter gif link!"
+          value={inputValue}
+          onChange={onInputChange}
+        />
+        <button type="submit" className="cta-button submit-gif-button">Submit</button>
+      </form>
+      <div className="gif-grid">
+        {gifList.map(gif => (
+          <div className="gif-item" key={gif}>
+            <img src={gif} alt={gif} />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 
   /*
@@ -70,15 +123,27 @@ const App = () => {
     return () => window.removeEventListener('load', onLoad);
   }, []);
 
+  useEffect(() => {
+    if (walletAddress) {
+      console.log('Fetching GIF list...');
+      
+      // Call Solana program here.
+  
+      // Set state
+      setGifList(TEST_GIFS);
+    }
+  }, [walletAddress]);
+
   return (
     <div className="App">
       <div className={walletAddress ? 'authed-container' : 'container'}>
         <div className="header-container">
-          <p className="header">🖼 GIF Portal - ZBR's Version</p>
+          <p className="header">🖼 World's Best Scrubs GIFs</p>
           <p className="sub-text">
-            View your GIF collection in the metaverse ✨
+            Celebrating the hard-working doctors of Sacred Heart ✨
           </p>
           {!walletAddress && renderNotConnectedContainer()}
+          {walletAddress && renderConnectedContainer()}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
