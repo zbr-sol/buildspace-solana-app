@@ -142,6 +142,25 @@ const App = () => {
     setInputValue('');
   };
 
+  const upVote = async (link) => {
+    console.log('Upvoting...');
+    try {
+      const provider = getProvider();
+      const program = new Program(idl, programID, provider);    
+
+      await program.rpc.upvoteGif(link, {
+        accounts: {
+          baseAccount: baseAccount.publicKey,
+          user: provider.wallet.publicKey,
+        },
+      });
+      console.log("GIF successfully upvoted", link);
+      await getGifList();
+    } catch (error) {
+      console.log("Error upvoting GIF:", error);
+    }
+  };
+
   const renderNotConnectedContainer = () => (
     <button
       className="cta-button connect-wallet-button"
@@ -187,6 +206,14 @@ const App = () => {
               <div className="gif-item" key={index}>
                 <img src={item.gifLink} alt={`gif number ${index}`} />
                 <p className="submitted-by-text">Submitted by {item.userAddress.toString()}</p>
+                <button onClick={(event) => {
+                  event.preventDefault();
+                  upVote(item.gifLink);
+                }}>
+                  Upvote?
+                </button>
+                <p className="submitted-by-text">Upvotes - {item.upvotes.toString()}</p>
+                
               </div>
             ))}
           </div>
