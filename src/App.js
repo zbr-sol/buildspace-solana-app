@@ -5,6 +5,7 @@ import idl from './idl.json';
 import keyPair from './keypair.json';
 import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
+import { address } from 'ip';
 
 // Constants
 // SystemProgram is a reference to the Solana runtime!
@@ -161,6 +162,27 @@ const App = () => {
     }
   };
 
+  const tip = async (address) => {
+    console.log('Tipping...');
+    try {
+      const provider = getProvider();
+      const program = new Program(idl, programID, provider);    
+
+      await program.rpc.tipSmallSol({
+        accounts: {
+          baseAccount: baseAccount.publicKey,
+          from: provider.wallet.publicKey,
+          to: address,
+          systemProgram: SystemProgram.programId,
+        },
+      });
+      console.log("Tip successfully sent");
+      
+    } catch (error) {
+      console.log("Error tipping:", error);
+    }
+  };
+
   const renderNotConnectedContainer = () => (
     <button
       className="cta-button connect-wallet-button"
@@ -213,6 +235,12 @@ const App = () => {
                   Upvote?
                 </button>
                 <p className="submitted-by-text">Upvotes - {item.upvotes.toString()}</p>
+                <button onClick={(event) => {
+                  event.preventDefault();
+                  tip(item.userAddress.toString());
+                }}>
+                  Send 0.01 SOL tip
+                </button>
                 
               </div>
             ))}

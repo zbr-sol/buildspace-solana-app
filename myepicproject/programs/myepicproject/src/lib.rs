@@ -40,6 +40,22 @@ pub mod myepicproject {
     }
     Ok(())
   }
+
+  pub fn tip_small_sol(ctx: Context<TipSmallSol>) -> ProgramResult {
+    let tx = anchor_lang::solana_program::system_instruction::transfer(
+        &ctx.accounts.from.key(),
+        &ctx.accounts.to.key(),
+        10000000
+    );
+    anchor_lang::solana_program::program::invoke(
+        &tx,
+        &[
+            ctx.accounts.from.to_account_info(),
+            ctx.accounts.to.to_account_info(),
+        ],
+    );
+    Ok(())
+  }
 }
 
 // Attach certain variables to the StartStuffOff context.
@@ -67,6 +83,17 @@ pub struct UpvoteGif<'info> {
   pub base_account: Account<'info, BaseAccount>,
   #[account(mut)]
   pub user: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct TipSmallSol<'info> {
+  #[account(mut)]
+  pub base_account: Account<'info, BaseAccount>,
+  #[account(mut)]
+  from: Signer<'info>,
+  #[account(mut)]
+  to: AccountInfo<'info>,
+  system_program: Program<'info, System>,
 }
 
 // Create a custom struct for us to work with.
