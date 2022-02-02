@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import idl from './idl.json';
 import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
 
