@@ -128,3 +128,8 @@
 .connected-container button {
   height: 50px;
 }
+
+.submitted-by-text {
+  color: white;
+  font-size: 16px;
+}

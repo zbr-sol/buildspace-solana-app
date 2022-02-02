@@ -186,6 +186,7 @@ const App = () => {
             {gifList.map((item, index) => (
               <div className="gif-item" key={index}>
                 <img src={item.gifLink} alt={`gif number ${index}`} />
+                <p className="submitted-by-text">Submitted by {item.userAddress.toString()}</p>
               </div>
             ))}
           </div>
