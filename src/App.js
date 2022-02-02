@@ -5,11 +5,10 @@ import idl from './idl.json';
 import keyPair from './keypair.json';
 import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
-import { address } from 'ip';
 
 // Constants
 // SystemProgram is a reference to the Solana runtime!
-const { SystemProgram, Keypair } = web3;
+const { SystemProgram } = web3;
 
 // Use the keyPair value we imported from the local keypair.json file
 const arr = Object.values(keyPair._keypair.secretKey)
@@ -28,15 +27,6 @@ const opts = {
 }
 const TWITTER_HANDLE = 'zbr_sol';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-
-const TEST_GIFS = [
-  'https://media.giphy.com/media/3o7TKpKJHK0teBsdEI/giphy.gif',
-  'https://media.giphy.com/media/nQdIeEMDNtASk/giphy.gif',
-  'https://media.giphy.com/media/QrQJeDeOZJLtm/giphy.gif',
-  'https://media.giphy.com/media/qAB5xbv44cCAg/giphy.gif',
-  'https://media.giphy.com/media/NMRWHDgSRS8es/giphy.gif',
-  'https://media.giphy.com/media/jP6d3UZh8GNRm/giphy.gif'
-];
 
 const App = () => {
   const [walletAddress, setWalletAddress] = useState(null);
@@ -283,6 +273,7 @@ const App = () => {
       
       getGifList();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletAddress]);
 
   return (
