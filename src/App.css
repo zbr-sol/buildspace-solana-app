@@ -80,6 +80,7 @@
   cursor: pointer;
   padding-left: 8px;
   padding-right: 8px;
+  width: 75px;
 }
 
 .upvote-button:hover {
@@ -153,7 +154,6 @@
 
 .connected-container button {
   height: 50px;
-  width: 75px;
 }
 
 .submitted-by-text {
