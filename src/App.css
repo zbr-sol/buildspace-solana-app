@@ -73,15 +73,23 @@
 .upvote-button {
   background-color: #00c7bd;
   color: #13002d;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   border: 0;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .upvote-button:hover {
   opacity: 0.9;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;;
 }
 
 .footer-container {
@@ -127,6 +135,7 @@
   border-radius: 10px;
   object-fit: cover;
 }
+
 
 .connected-container input[type='text'] {
   display: inline-block;
