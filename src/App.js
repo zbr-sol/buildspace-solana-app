@@ -217,15 +217,15 @@ const App = () => {
             {gifList.map((item, index) => (
               <div className="gif-item" key={index}>
                 <img src={item.gifLink} alt={`gif number ${index}`} />
-                <p className="submitted-by-text">Submitted by {item.userAddress.toString()}</p>
-                <button onClick={(event) => {
+                <p className="submitted-by-text">Submitted by <a className="submitted-by-link" href={`https://explorer.solana.com/address/${item.userAddress.toString()}?cluster=devnet`}>{item.userAddress.toString().substring(0,4)}...{item.userAddress.toString().substring(item.userAddress.toString().length - 4)}</a></p>
+                <button className="upvote-button" onClick={(event) => {
                   event.preventDefault();
                   upVote(item.gifLink);
                 }}>
                   Upvote?
                 </button>
                 <p className="submitted-by-text">Upvotes - {item.upvotes.toString()}</p>
-                <button onClick={(event) => {
+                <button className="upvote-button" onClick={(event) => {
                   event.preventDefault();
                   tip(item.userAddress.toString());
                 }}>

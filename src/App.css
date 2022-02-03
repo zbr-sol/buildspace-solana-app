@@ -45,7 +45,7 @@
   width: auto;
   padding-left: 40px;
   padding-right: 40px;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
@@ -59,21 +59,38 @@
 }
 
 .submit-gif-button {
-  background: -webkit-linear-gradient(left, #4e44ce, #35aee2);
+  background-color: #00c7bd;
   background-size: 200% 200%;
-  animation: gradient-animation 4s ease infinite;
+  
+  color: #13002d;
   margin-left: 10px;
+}
+
+.submit-gif-button:hover {
+  opacity: 0.9;
+}
+
+.upvote-button {
+  background-color: #00c7bd;
+  color: #13002d;
+  font-size: 18px;
+  font-weight: 700;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.upvote-button:hover {
+  opacity: 0.9;
 }
 
 .footer-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   width: 100%;
-  bottom: 0;
-  left: 0;
-  padding-bottom: 45px;
+  padding-bottom: 24px;
+  margin-top: 48px;
 }
 
 .twitter-logo {
@@ -132,4 +149,8 @@
 .submitted-by-text {
   color: white;
   font-size: 16px;
+}
+
+.submitted-by-link {
+  color: white;
 }
