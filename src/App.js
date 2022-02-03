@@ -22,6 +22,7 @@ const programID = new PublicKey(idl.metadata.address);
 const network = clusterApiUrl('devnet');
 
 // Controls how we want to acknowledge when a transaction is "done".
+// https://solana-labs.github.io/solana-web3.js/modules.html#Commitment
 const opts = {
   preflightCommitment: "processed"
 }
@@ -213,7 +214,6 @@ const App = () => {
             </button>
           </form>
           <div className="gif-grid">
-            {/* We use index as the key instead, also, the src is now item.gifLink */}
             {gifList.map((item, index) => (
               <div className="gif-item" key={index}>
                 <img src={item.gifLink} alt={`gif number ${index}`} />
@@ -280,7 +280,7 @@ const App = () => {
     <div className="App">
       <div className={walletAddress ? 'authed-container' : 'container'}>
         <div className="header-container">
-          <p className="header">🖼 World's Best Scrubs GIFs</p>
+          <p className="header">World's Best Scrubs GIFs</p>
           <p className="sub-text">
             Celebrating the hard-working doctors of Sacred Heart ✨
           </p>
